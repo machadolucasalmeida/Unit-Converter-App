@@ -126,6 +126,7 @@ fun MainScreenUnitCategory(navController: NavController, modifier: Modifier = Mo
             }
             OutlinedTextField(
                 value = searchBar,
+                singleLine = true,
                 onValueChange = {
                                 searchBar = it
                 },
