@@ -68,6 +68,24 @@ class MainActivity : ComponentActivity() {
                     ) {
                         SettingsScreenLayout(navController)
                     }
+                    composable(
+                        route = "Bookmarks",
+                        enterTransition = { fadeIn(animationSpec = tween(700)) + slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(700)) },
+                        exitTransition = { fadeOut(animationSpec = tween(700)) + slideOutHorizontally(targetOffsetX = { -1000 }, animationSpec = tween(700)) },
+                        popEnterTransition = { fadeIn(animationSpec = tween(700)) + slideInHorizontally(initialOffsetX = { -1000 }, animationSpec = tween(700)) },
+                        popExitTransition = { fadeOut(animationSpec = tween(700)) + slideOutHorizontally(targetOffsetX = { 1000 }, animationSpec = tween(700)) }
+                    ) {
+                        BookmarksLayoutScreen(navController)
+                    }
+                    composable(
+                        route = "SearchScreen",
+                        enterTransition = { fadeIn(animationSpec = tween(700)) + slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(700)) },
+                        exitTransition = { fadeOut(animationSpec = tween(700)) + slideOutHorizontally(targetOffsetX = { -1000 }, animationSpec = tween(700)) },
+                        popEnterTransition = { fadeIn(animationSpec = tween(700)) + slideInHorizontally(initialOffsetX = { -1000 }, animationSpec = tween(700)) },
+                        popExitTransition = { fadeOut(animationSpec = tween(700)) + slideOutHorizontally(targetOffsetX = { 1000 }, animationSpec = tween(700)) }
+                    ) {
+                        SearchScreenLayout(navController)
+                    }
                 }
             }
         }

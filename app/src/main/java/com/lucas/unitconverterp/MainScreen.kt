@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
@@ -33,7 +34,9 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -72,6 +75,7 @@ fun MainScreenUnitCategory(navController: NavController, modifier: Modifier = Mo
     var unitTitle by remember { mutableStateOf("") }
     var dropdownExpanded by remember { mutableStateOf(false) }
     var searchBar by remember { mutableStateOf("") }
+    var wasFavIconClicked by remember { mutableStateOf(true) }
 
 
     Scaffold(modifier = modifier
@@ -83,13 +87,10 @@ fun MainScreenUnitCategory(navController: NavController, modifier: Modifier = Mo
             verticalArrangement = Arrangement.spacedBy(25.dp)
         ) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End, verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = Icons.Default.Star,
-                    contentDescription = "Favorites Icon",
-                    tint = MaterialTheme.colorScheme.surface,
-                    modifier = Modifier.clickable {  })
-                Spacer(modifier = Modifier.padding(2.dp))
 
+                IconButton(onClick = {navController.navigate("Bookmarks")}, modifier = Modifier.padding(bottom = 2.dp)) {
+                    Icon(imageVector = Icons.Default.Star, contentDescription = "Favorites Icon", tint = MaterialTheme.colorScheme.surface,)
+                }
                 Box(){
                     Card(colors = CardDefaults.cardColors(Color.Transparent),
                         onClick = {
@@ -116,44 +117,26 @@ fun MainScreenUnitCategory(navController: NavController, modifier: Modifier = Mo
                             }
                         )
                     }
-
-
-
                 }
 
 
 
             }
-            OutlinedTextField(
-                value = searchBar,
-                singleLine = true,
-                onValueChange = {
-                                searchBar = it
-                },
-                trailingIcon = {
+
+            Card(modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondary),
+                shape = RoundedCornerShape(15.dp),
+                onClick = {navController.navigate("SearchScreen")}){
+                Row(modifier = Modifier.fillMaxWidth().padding(16.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically){
+                    Text(text = "Search for units and categories", color = MaterialTheme.colorScheme.surface)
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "Search icon",
                         modifier = Modifier.clickable {  },
                         tint = MaterialTheme.colorScheme.surface
                     )
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.CenterHorizontally),
-                label = { Text(text = "Search for units and categories", color = MaterialTheme.colorScheme.surface)},
-                shape = RoundedCornerShape(15.dp),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    containerColor = MaterialTheme.colorScheme.secondary,
-                    unfocusedBorderColor = Color.Transparent,
-                    focusedBorderColor = Color.Transparent,
-                    errorBorderColor = Color.Transparent,
-                    disabledBorderColor = Color.Transparent,
-                    focusedTextColor = MaterialTheme.colorScheme.surface,
-                    unfocusedTextColor = MaterialTheme.colorScheme.surface
-                )
-
-            )
+                }
+            }
             Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Text(text = "Common")
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -314,11 +297,9 @@ fun MainScreenUnitCategory(navController: NavController, modifier: Modifier = Mo
             }
         }
     }
-
-
-
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Preview(showBackground = true)
 @Composable
 fun MainScreenUnitCategoryPreview() {

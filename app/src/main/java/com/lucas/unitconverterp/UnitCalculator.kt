@@ -34,12 +34,19 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ChipBorder
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -48,10 +55,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.PopupProperties
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UnitCalculatorDesign(navController:NavController, modifier: Modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
     //Layout Settings
@@ -66,6 +75,8 @@ fun UnitCalculatorDesign(navController:NavController, modifier: Modifier = Modif
     val copyLogoThemeChange = if(isSystemInDarkTheme()){R.drawable.copy_dark_icon}else{R.drawable.copy_icon}
     val calculatorLogoThemeChange = if(isSystemInDarkTheme()){R.drawable.calculator_dark_icon}else{R.drawable.calculator_icon}
     val expandLogoThemeChange = if(isSystemInDarkTheme()){R.drawable.expand_dark_icon}else{R.drawable.expand_icon}
+
+    var dropdownExpanded by remember { mutableStateOf(false) }
 
     //Setting functionality
 
@@ -95,11 +106,41 @@ fun UnitCalculatorDesign(navController:NavController, modifier: Modifier = Modif
                         }
                         Text(text = "unitTitle", fontSize = 25.sp, color = MaterialTheme.colorScheme.surface)
                     }
-                    Row(verticalAlignment = Alignment.CenterVertically,horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
                         Image(painter = painterResource(id = expandLogoThemeChange),contentDescription = "")
                         //Image(painter = painterResource(id = R.drawable.unexpand_icon), contentDescription = "")
-                        Icon(imageVector = Icons.Default.Star, contentDescription = "Favorites Icon", tint = MaterialTheme.colorScheme.surface)
-                        Icon(imageVector = Icons.Default.MoreVert,contentDescription = "More Information Icon", tint = MaterialTheme.colorScheme.surface)
+                        IconButton(onClick = {navController.navigate("Bookmarks")}, modifier = Modifier.padding(bottom = 2.dp)) {
+                            Icon(imageVector = Icons.Default.Star, contentDescription = "Favorites Icon", tint = MaterialTheme.colorScheme.surface)
+                        }
+                        Box(){
+                            Card(colors = CardDefaults.cardColors(Color.Transparent),
+                                onClick = {
+                                    dropdownExpanded = true
+                                }
+                            ){
+                                Icon(
+                                    imageVector = Icons.Default.MoreVert,
+                                    contentDescription = "More Information Icon",
+                                    tint = MaterialTheme.colorScheme.surface)
+                            }
+                            DropdownMenu(expanded = dropdownExpanded, onDismissRequest = {dropdownExpanded = false},
+                                modifier = Modifier.background(MaterialTheme.colorScheme.secondary), properties = PopupProperties(focusable = true)
+                            ) {
+                                DropdownMenuItem(
+                                    text = {
+                                        Text(
+                                            text = "Settings",
+                                            color = MaterialTheme.colorScheme.surface)
+                                    },
+                                    onClick = {
+                                        navController.navigate("SettingsScreen")
+                                        dropdownExpanded = false
+                                    }
+                                )
+                            }
+                        }
+
+
                     }
                 }
                 Spacer(modifier = Modifier.padding(20.dp))
