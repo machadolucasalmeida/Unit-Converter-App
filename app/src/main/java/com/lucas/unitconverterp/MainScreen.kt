@@ -132,7 +132,7 @@ fun MainScreenUnitCategory(navController: NavController, modifier: Modifier = Mo
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "Search icon",
-                        modifier = Modifier.clickable {  },
+                        modifier = Modifier.clickable {navController.navigate("SearchScreen")},
                         tint = MaterialTheme.colorScheme.surface
                     )
                 }

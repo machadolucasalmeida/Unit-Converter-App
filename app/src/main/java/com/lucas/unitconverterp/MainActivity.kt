@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -38,7 +39,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             UnitConverterPTheme {
-
+                val viewModel = viewModel<CalculatorViewModel>()
+                val state = viewModel.state
                 val navController = rememberAnimatedNavController()
                 AnimatedNavHost(navController = navController, startDestination = "MainScreen", modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
                     composable(
@@ -86,6 +88,16 @@ class MainActivity : ComponentActivity() {
                     ) {
                         SearchScreenLayout(navController)
                     }
+                    composable(
+                        route = "CalculatorScreen",
+                        enterTransition = { fadeIn(animationSpec = tween(700)) + slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(700)) },
+                        exitTransition = { fadeOut(animationSpec = tween(700)) + slideOutHorizontally(targetOffsetX = { -1000 }, animationSpec = tween(700)) },
+                        popEnterTransition = { fadeIn(animationSpec = tween(700)) + slideInHorizontally(initialOffsetX = { -1000 }, animationSpec = tween(700)) },
+                        popExitTransition = { fadeOut(animationSpec = tween(700)) + slideOutHorizontally(targetOffsetX = { 1000 }, animationSpec = tween(700)) }
+                    ) {
+                        CalculatorLayout(navController, state = state, onAction = viewModel::onAction)
+                    }
+
                 }
             }
         }

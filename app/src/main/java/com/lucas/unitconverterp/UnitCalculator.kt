@@ -222,7 +222,7 @@ fun UnitCalculatorDesign(navController:NavController, modifier: Modifier = Modif
                             Spacer(modifier = Modifier.padding(2.dp))
                             Text(text = "Copy result", fontSize = 16.sp, color = MaterialTheme.colorScheme.surface)})
                     AssistChip(
-                        onClick = { /*TODO*/ },
+                        onClick = {navController.navigate("CalculatorScreen")},
                         label = {
                             Image(painter = painterResource(id = calculatorLogoThemeChange), contentDescription = "")
                             Spacer(modifier = Modifier.padding(2.dp))

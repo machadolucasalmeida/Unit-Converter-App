@@ -71,4 +71,5 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$nav_version")
     val animatedNav_version = "0.35.1-alpha"
     implementation ("com.google.accompanist:accompanist-navigation-animation:$animatedNav_version")
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
 }

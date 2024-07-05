@@ -1,4 +1,9 @@
 package com.lucas.unitconverterp
 
-class CalculatorOperations {
+open class CalculatorOperations(val symbol: String) {
+    object Add: CalculatorOperations("+")
+    object Subtract: CalculatorOperations("-")
+    object Multiply: CalculatorOperations("x")
+    object Divide: CalculatorOperations("÷")
+    object Percentage: CalculatorOperations("%")
 }
