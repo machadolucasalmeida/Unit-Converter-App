@@ -39,8 +39,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             UnitConverterPTheme {
-                val viewModel = viewModel<CalculatorViewModel>()
-                val state = viewModel.state
+
                 val navController = rememberAnimatedNavController()
                 AnimatedNavHost(navController = navController, startDestination = "MainScreen", modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
                     composable(
@@ -95,7 +94,7 @@ class MainActivity : ComponentActivity() {
                         popEnterTransition = { fadeIn(animationSpec = tween(700)) + slideInHorizontally(initialOffsetX = { -1000 }, animationSpec = tween(700)) },
                         popExitTransition = { fadeOut(animationSpec = tween(700)) + slideOutHorizontally(targetOffsetX = { 1000 }, animationSpec = tween(700)) }
                     ) {
-                        CalculatorLayout(navController, state = state, onAction = viewModel::onAction)
+                        CalculatorLayout(navController)
                     }
 
                 }

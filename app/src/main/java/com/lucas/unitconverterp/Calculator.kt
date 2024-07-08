@@ -57,7 +57,7 @@ import com.lucas.unitconverterp.ui.theme.ColorFontSettingsPage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CalculatorLayout(navController: NavController, state: CalculatorState, onAction: (CalculationActions) -> Unit, modifier: Modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
+fun CalculatorLayout(navController: NavController, modifier: Modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
     //Layout Settings
     val scrollState = rememberScrollState()
     val buttonSizeHeight = 70.dp
@@ -136,7 +136,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                             }
                         }
                         Column(verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxHeight()){
-                            Text(text = state.number1 + (state.operation?.symbol ?:"") + state.number2, color = MaterialTheme.colorScheme.surface, fontSize = 30.sp, maxLines = 2)
+                            Text(text = "5+5", color = MaterialTheme.colorScheme.surface, fontSize = 30.sp, maxLines = 2)
                             Text(text = "10", color = MaterialTheme.colorScheme.surface, fontSize = 24.sp,modifier = Modifier.align(Alignment.End))
                         }
                     }
@@ -154,7 +154,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary),
-                                onClick = {CalculationActions.Clear}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "AC", fontSize = fontSizeButton, color = Color.White)
@@ -178,7 +178,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary),
-                                onClick = {CalculationActions.Operation(CalculatorOperations.Percentage)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "%", fontSize = fontSizeButton, color = Color.White)
@@ -191,7 +191,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary),
-                                onClick = {CalculationActions.Operation(CalculatorOperations.Divide)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "÷", fontSize = fontSizeButton, color = Color.White)
@@ -206,7 +206,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onSurface),
-                                onClick = {CalculationActions.Number(7)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "7", fontSize = fontSizeButton, color = MaterialTheme.colorScheme.surface)
@@ -219,7 +219,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onSurface),
-                                onClick = {CalculationActions.Number(8)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "8", fontSize = fontSizeButton, color = MaterialTheme.colorScheme.surface)
@@ -232,7 +232,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onSurface),
-                                onClick = {CalculationActions.Number(9)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "9", fontSize = fontSizeButton, color = MaterialTheme.colorScheme.surface)
@@ -245,7 +245,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary),
-                                onClick = {CalculationActions.Operation(CalculatorOperations.Multiply)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "X", fontSize = fontSizeButton, color = Color.White)
@@ -261,7 +261,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onSurface),
-                                onClick = {CalculationActions.Number(4)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "4", fontSize = fontSizeButton, color = MaterialTheme.colorScheme.surface)
@@ -274,7 +274,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onSurface),
-                                onClick = {CalculationActions.Number(5)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "5", fontSize = fontSizeButton, color = MaterialTheme.colorScheme.surface)
@@ -287,7 +287,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onSurface),
-                                onClick = {CalculationActions.Number(6)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "6", fontSize = fontSizeButton, color = MaterialTheme.colorScheme.surface)
@@ -300,7 +300,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary),
-                                onClick = {CalculationActions.Operation(CalculatorOperations.Subtract)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "-", fontSize = fontSizeButton, color = Color.White)
@@ -315,7 +315,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onSurface),
-                                onClick = {CalculationActions.Number(1)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "1", fontSize = fontSizeButton, color = MaterialTheme.colorScheme.surface)
@@ -328,7 +328,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onSurface),
-                                onClick = {CalculationActions.Number(2)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "2", fontSize = fontSizeButton, color = MaterialTheme.colorScheme.surface)
@@ -341,7 +341,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onSurface),
-                                onClick = {CalculationActions.Number(3)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "3", fontSize = fontSizeButton, color = MaterialTheme.colorScheme.surface)
@@ -353,7 +353,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary),
-                                onClick = {CalculationActions.Operation(CalculatorOperations.Add)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "+", fontSize = fontSizeButton, color = Color.White)
@@ -368,7 +368,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onSurface),
-                                onClick = {CalculationActions.Decimal}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = ".", fontSize = fontSizeButton, color = MaterialTheme.colorScheme.surface)
@@ -381,7 +381,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onSurface),
-                                onClick = {CalculationActions.Number(0)}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "0", fontSize = fontSizeButton, color = MaterialTheme.colorScheme.surface)
@@ -393,7 +393,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onSurface),
-                                onClick = {CalculationActions.Delete}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Image(painter = painterResource(id = deleteIconChange), contentDescription = "")
@@ -405,7 +405,7 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
                                 .clip(shape = RoundedCornerShape(roundedCornerButton)),
                                 elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
                                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary),
-                                onClick = {CalculationActions.Calculate}
+                                onClick = {}
                             ){
                                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                                     Text(text = "=", fontSize = fontSizeButton, color = Color.White)
@@ -425,7 +425,5 @@ fun CalculatorLayout(navController: NavController, state: CalculatorState, onAct
 @Composable
 fun CalculatorLayoutPreview() {
     val navController = rememberAnimatedNavController()
-    val viewModel = viewModel<CalculatorViewModel>()
-    val state = viewModel.state
-    CalculatorLayout(navController, state = state, onAction = viewModel::onAction)
+    CalculatorLayout(navController)
 }
