@@ -1,11 +1,10 @@
 @file:OptIn(ExperimentalAnimationApi::class)
 
-package com.lucas.unitconverterp
+package com.lucas.unitconverterp.ui.screens.unitconverter_screen
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -13,7 +12,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,18 +20,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AssistChip
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ChipBorder
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -57,12 +51,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.PopupProperties
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.lucas.unitconverterp.R
+
+val viewModel = UnitConverterViewModel()
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UnitCalculatorDesign(navController:NavController, modifier: Modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
+fun UnitCalculatorDesign(navController:NavController, viewModel:UnitConverterViewModel, modifier: Modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
     //Layout Settings
     val scrollState = rememberScrollState()
     val buttonSizeHeight = 70.dp
@@ -71,10 +67,26 @@ fun UnitCalculatorDesign(navController:NavController, modifier: Modifier = Modif
     val specialButtonSizeWidth = 85.dp
     val roundedCornerButton = 25.dp
     val fontSizeButton = 30.sp
-    val swapLogoThemeChange = if(isSystemInDarkTheme()){R.drawable.swap_dark_icon}else{R.drawable.swap_icon}
-    val copyLogoThemeChange = if(isSystemInDarkTheme()){R.drawable.copy_dark_icon}else{R.drawable.copy_icon}
-    val calculatorLogoThemeChange = if(isSystemInDarkTheme()){R.drawable.calculator_dark_icon}else{R.drawable.calculator_icon}
-    val expandLogoThemeChange = if(isSystemInDarkTheme()){R.drawable.expand_dark_icon}else{R.drawable.expand_icon}
+    val swapLogoThemeChange = if(isSystemInDarkTheme()){
+        R.drawable.swap_dark_icon
+    }else{
+        R.drawable.swap_icon
+    }
+    val copyLogoThemeChange = if(isSystemInDarkTheme()){
+        R.drawable.copy_dark_icon
+    }else{
+        R.drawable.copy_icon
+    }
+    val calculatorLogoThemeChange = if(isSystemInDarkTheme()){
+        R.drawable.calculator_dark_icon
+    }else{
+        R.drawable.calculator_icon
+    }
+    val expandLogoThemeChange = if(isSystemInDarkTheme()){
+        R.drawable.expand_dark_icon
+    }else{
+        R.drawable.expand_icon
+    }
 
     var dropdownExpanded by remember { mutableStateOf(false) }
 
@@ -104,7 +116,7 @@ fun UnitCalculatorDesign(navController:NavController, modifier: Modifier = Modif
                         IconButton(onClick = {navController.navigate("MainScreen")}) {
                             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Go back icon", tint = MaterialTheme.colorScheme.surface)
                         }
-                        Text(text = "unitTitle", fontSize = 25.sp, color = MaterialTheme.colorScheme.surface)
+                        Text(text = viewModel.repoInfo.getInfo().titleCategory, fontSize = 25.sp, color = MaterialTheme.colorScheme.surface)
                     }
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Image(painter = painterResource(id = expandLogoThemeChange),contentDescription = "")
@@ -400,11 +412,4 @@ fun UnitCalculatorDesign(navController:NavController, modifier: Modifier = Modif
         }
     }
 
-}
-
-@Preview
-@Composable
-fun UnitCalculatorDesignPreview() {
-    val navController = rememberAnimatedNavController()
-    UnitCalculatorDesign(navController)
 }

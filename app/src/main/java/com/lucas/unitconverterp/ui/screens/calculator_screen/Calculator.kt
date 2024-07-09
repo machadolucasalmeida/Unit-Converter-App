@@ -1,6 +1,5 @@
-package com.lucas.unitconverterp
+package com.lucas.unitconverterp.ui.screens.calculator_screen
 
-import android.graphics.Paint
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,9 +19,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -42,18 +39,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.BlendMode.Companion.Clear
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.PopupProperties
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.lucas.unitconverterp.ui.theme.ColorFontSettingsPage
+import com.lucas.unitconverterp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -66,7 +60,11 @@ fun CalculatorLayout(navController: NavController, modifier: Modifier = Modifier
     val specialButtonSizeWidth = 85.dp
     val roundedCornerButton = 25.dp
     val fontSizeButton = 30.sp
-    val deleteIconChange = if(isSystemInDarkTheme()){R.drawable.delete_icon}else{R.drawable.delete_light_icon}
+    val deleteIconChange = if(isSystemInDarkTheme()){
+        R.drawable.delete_icon
+    }else{
+        R.drawable.delete_light_icon
+    }
     var dropdownExpanded by remember { mutableStateOf(false) }
 
     //Functionality
